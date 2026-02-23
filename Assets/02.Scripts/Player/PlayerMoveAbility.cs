@@ -51,8 +51,6 @@ public class PlayerMoveAbility : MonoBehaviour
             _yVelocity -= _gravity * Time.deltaTime;
         }
 
-        Debug.Log(_controller.isGrounded);
-
         if (Input.GetKey(KeyCode.Space) && _controller.isGrounded)
         {
             _yVelocity = _jumpForce;
