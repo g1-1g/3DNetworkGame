@@ -31,7 +31,7 @@ public class PlayerMoveAbility : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        Vector3 direction = new Vector3(h, 0, v);
+        Vector3 direction = transform.rotation * new Vector3(h, 0, v);
         direction.Normalize();
 
         _controller.Move(direction * _moveSpeed * Time.deltaTime);
