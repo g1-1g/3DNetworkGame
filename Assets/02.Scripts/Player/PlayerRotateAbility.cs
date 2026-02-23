@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerRotateAbility : MonoBehaviour
 {
+    public Transform CameraRoot; 
+
     [SerializeField]
     private float _rotationSpeed = 15f;
 
@@ -21,6 +23,8 @@ public class PlayerRotateAbility : MonoBehaviour
         _my = Mathf.Clamp(_my, -90f, 90f);
 
         transform.eulerAngles = new Vector3(0f, _mx, 0f);
+
+        CameraRoot.localRotation = Quaternion.Euler(-_my, 0f, 0f);
     }
 
 }
