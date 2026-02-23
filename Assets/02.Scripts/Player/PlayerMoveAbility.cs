@@ -21,7 +21,7 @@ public class PlayerMoveAbility : MonoBehaviour
     private float _moveSpeed;
     private float _speedOffset = 0.05f;
 
-    private const float _gravity = 9.8f;
+    private const float _gravity = 18f;
 
     private float _yVelocity = 0f;
 

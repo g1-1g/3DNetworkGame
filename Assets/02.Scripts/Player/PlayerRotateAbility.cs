@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerRotateAbility : MonoBehaviour
@@ -13,6 +14,9 @@ public class PlayerRotateAbility : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+
+        CinemachineCamera vcam = GameObject.Find("FollowCamera").GetComponent<CinemachineCamera>();
+        vcam.Follow = CameraRoot.transform;
     }
 
     private void Update()
