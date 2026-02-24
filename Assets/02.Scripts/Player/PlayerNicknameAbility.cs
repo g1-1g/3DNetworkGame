@@ -10,10 +10,4 @@ public class PlayerNicknameAbility : PlayerAbility
 
         _nicknameTextUI.color = _owner.PhotonView.IsMine ? Color.white : Color.aliceBlue;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        _nicknameTextUI.transform.forward = Camera.main.transform.forward;
-    }
 }
