@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMoveAbility : MonoBehaviour
+public class PlayerMoveAbility : PlayerAbility
 {
     [SerializeField]
     private float _walkSpeed = 7f;
@@ -29,14 +29,18 @@ public class PlayerMoveAbility : MonoBehaviour
 
     private PlayerAnimator _animator;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         _controller = GetComponent<CharacterController>();
         _animator = GetComponent<PlayerAnimator>();
     }
 
     void Update()
     {
+        if (!_owner.PhotonView.IsMine) return;
+
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 

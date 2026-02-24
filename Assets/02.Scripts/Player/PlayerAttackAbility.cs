@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerAttackAbility : MonoBehaviour
+public class PlayerAttackAbility : PlayerAbility
 {
     public AttackMode AttackMode;
 
@@ -13,13 +13,17 @@ public class PlayerAttackAbility : MonoBehaviour
     
     private PlayerAnimator _animator;
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
+
         _animator = GetComponent<PlayerAnimator>();
     }
 
     void Update()
     {
+        if (!_owner.PhotonView.IsMine) return;
+
         if (Input.GetMouseButtonDown(0) || _isBuffered)
         {
             if (_isAttacking)
