@@ -11,6 +11,9 @@ public class PlayerMoveAbility : PlayerAbility
     [SerializeField]
     public float _jumpForce = 25f;
 
+    [SerializeField]
+    public Vector3 _groundCheckOffset = new Vector3(0, 0.1f,0);
+
     private float _moveSpeed;
 
     private float _speedOffset = 0.05f;
@@ -24,6 +27,8 @@ public class PlayerMoveAbility : PlayerAbility
     private PlayerAnimator _animator;
 
     public bool ShouldRun;
+
+    public bool IsGrounded {  get; private set; }
 
     protected override void Awake()
     {
@@ -48,12 +53,15 @@ public class PlayerMoveAbility : PlayerAbility
         _controller.Move(direction * _moveSpeed * Time.deltaTime);
 
        
-        ApplyGravity();
+        ApplyGravity();  
     }
 
     private void ApplyGravity()
     {
-        if (_controller.isGrounded)
+        IsGrounded = Physics.Raycast(transform.position + _groundCheckOffset, Vector3.down, 0.2f);
+        Debug.DrawRay(transform.position, Vector3.down * 0.2f, IsGrounded ? Color.green : Color.red);
+
+        if (IsGrounded && _yVelocity < 0)
         {
             _yVelocity = -1;
         }
@@ -62,7 +70,7 @@ public class PlayerMoveAbility : PlayerAbility
             _yVelocity -= _gravity * Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.Space) && _controller.isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
         {
             if (_owner.Stat.Stamina < _owner.Stat.StaminaDrainOnJump) return;
 

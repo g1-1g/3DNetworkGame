@@ -2595,6 +2595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMoveAbility
   _speedChangeRate: 2
   _jumpForce: 10
+  _groundCheckOffset: {x: 0, y: 0.1, z: 0}
   ShouldRun: 0
 --- !u!114 &4259629110884797518
 MonoBehaviour:
@@ -2665,7 +2666,7 @@ MonoBehaviour:
   Stamina: 100
   MaxStamina: 100
   StaminaDrainOnRun: 10
-  StaminaDrainOnJump: 20
+  StaminaDrainOnJump: 10
   StaminaDrainOnAttack: 10
   StaminaRecoveryRate: 5
   WalkSpeed: 5
