@@ -6,20 +6,10 @@ using UnityEngine;
 public class PlayerMoveAbility : PlayerAbility
 {
     [SerializeField]
-    private float _walkSpeed = 7f;
-
-    [SerializeField]
-    private float _runMultiply = 2f;
-
-    [SerializeField]
-    private float _staminaAmount = 1f;
-
-    [SerializeField]
     private float _speedChangeRate = 3;
 
     [SerializeField]
     public float _jumpForce = 25f;
-
 
     private float _moveSpeed;
 
@@ -72,7 +62,10 @@ public class PlayerMoveAbility : PlayerAbility
 
         if (Input.GetKey(KeyCode.Space) && _controller.isGrounded)
         {
+            if (_owner.Stat.Stamina < _owner.Stat.StaminaDrainOnJump) return;
+
             _yVelocity = _jumpForce;
+            _owner.Stat.Stamina -= _owner.Stat.StaminaDrainOnJump;
         }
 
         Vector3 direction = new Vector3(0, _yVelocity, 0);
@@ -82,18 +75,18 @@ public class PlayerMoveAbility : PlayerAbility
 
     private void SpeedUpdate(float moveScale)
     {
-        bool shouldRun = Input.GetKey(KeyCode.LeftShift) && _owner.Stat.Stamina > _staminaAmount;
+        bool shouldRun = Input.GetKey(KeyCode.LeftShift) && _owner.Stat.Stamina > _owner.Stat.StaminaDrainOnRun;
         float targetSpeed;
 
         if (shouldRun)
         {
-            targetSpeed =  _walkSpeed * _runMultiply ;
-            _owner.Stat.Stamina -= _staminaAmount;
+            targetSpeed = _owner.Stat.WalkSpeed * _owner.Stat.RunMultiplier;
+            _owner.Stat.Stamina -= _owner.Stat.StaminaDrainOnRun * Time.deltaTime;
         }
         else
         {
-            targetSpeed = _walkSpeed;
-            if (_owner.Stat.Stamina != _owner.Stat.MaxStamina) _owner.Stat.Stamina++;
+            targetSpeed = _owner.Stat.WalkSpeed;
+            if (_owner.Stat.Stamina < _owner.Stat.MaxStamina) _owner.Stat.Stamina = Mathf.Min(_owner.Stat.Stamina + _owner.Stat.StaminaRecoveryRate * Time.deltaTime, _owner.Stat.MaxStamina);
         }
 
 
@@ -120,15 +113,15 @@ public class PlayerMoveAbility : PlayerAbility
             return 0;
         }
 
-        if (_moveSpeed < _walkSpeed)
+        if (_moveSpeed < _owner.Stat.WalkSpeed)
         {
-            return _moveSpeed / _walkSpeed;
+            return _moveSpeed / _owner.Stat.WalkSpeed;
         }
 
         else
         {
-            float excess = _moveSpeed - _walkSpeed;
-            float runRange = _walkSpeed*_runMultiply - _walkSpeed;
+            float excess = _moveSpeed - _owner.Stat.WalkSpeed;
+            float runRange = _owner.Stat.WalkSpeed * _owner.Stat.RunMultiplier - _owner.Stat.WalkSpeed;
             if (Mathf.Approximately(runRange, 0f)) return 1f;
             return 1 + excess / runRange;
         }
