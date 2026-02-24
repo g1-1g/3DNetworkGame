@@ -17,13 +17,7 @@ public class PlayerRotateAbility : PlayerAbility
 
     private void Start()
     {
-        // 포톤에서 가장 놓치기 쉽고 버그를 많이 일으키는 요소
-        if (!_owner.PhotonView.IsMine) return;
-
         Cursor.lockState = CursorLockMode.Locked;
-
-        CinemachineCamera vcam = GameObject.Find("FollowCamera").GetComponent<CinemachineCamera>();
-        vcam.Follow = CameraRoot.transform;
     }
 
     private void Update()

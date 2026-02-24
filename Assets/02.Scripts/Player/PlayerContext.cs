@@ -11,7 +11,7 @@ public class PlayerContext : MonoBehaviour
     {
         if (Player != null)
         {
-            OnPlayerAssigned?.Invoke(Player.transform);
+            SetPlayer(Player);
         }
     }
     public void SetPlayer(GameObject player)
