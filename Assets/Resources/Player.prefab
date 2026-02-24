@@ -2505,6 +2505,7 @@ GameObject:
   - component: {fileID: 8458000837755117670}
   - component: {fileID: 6524680759735473095}
   - component: {fileID: 873527368596599058}
+  - component: {fileID: 5806694851308375882}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2669,6 +2670,7 @@ MonoBehaviour:
   StaminaDrainOnJump: 10
   StaminaDrainOnAttack: 10
   StaminaRecoveryRate: 5
+  Damage: 20
   WalkSpeed: 5
   RunMultiplier: 3
 --- !u!114 &3416947767425930373
@@ -2749,6 +2751,12 @@ MonoBehaviour:
   - Type: 3
     SynchronizeType: 1
     Name: AttackType
+  - Type: 9
+    SynchronizeType: 0
+    Name: Reaction
+  - Type: 3
+    SynchronizeType: 0
+    Name: ReactionType
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -2780,6 +2788,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a7eb1dd8c4cca4ca0a987823accbdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStaminaRecoveryAbility
+--- !u!114 &5806694851308375882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5902022743216581123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778829bc2ed144f4e8be8f565b54ef50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponAbility
 --- !u!1 &6004280391353811118
 GameObject:
   m_ObjectHideFlags: 0
@@ -3963,16 +3983,64 @@ PrefabInstance:
       propertyPath: m_Name
       value: OHS03
       objectReference: {fileID: 0}
+    - target: {fileID: 5610884078883986163, guid: 9fbe61d1f4bc091439f25f985dd189a5, type: 3}
+      propertyPath: m_TagString
+      value: Weapon
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5610884078883986163, guid: 9fbe61d1f4bc091439f25f985dd189a5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3819841977017436328}
+    - targetCorrespondingSourceObject: {fileID: 5610884078883986163, guid: 9fbe61d1f4bc091439f25f985dd189a5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1003892790849814653}
   m_SourcePrefab: {fileID: 100100000, guid: 9fbe61d1f4bc091439f25f985dd189a5, type: 3}
 --- !u!4 &8575749097138423358 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5086268201243115593, guid: 9fbe61d1f4bc091439f25f985dd189a5, type: 3}
   m_PrefabInstance: {fileID: 3572801071210694263}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8955688176565902468 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5610884078883986163, guid: 9fbe61d1f4bc091439f25f985dd189a5, type: 3}
+  m_PrefabInstance: {fileID: 3572801071210694263}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &3819841977017436328
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8955688176565902468}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.39174208, y: 1.4156286, z: 0.08912745}
+  m_Center: {x: -0.00000013382633, y: 0.5035896, z: 0.000000016971562}
+--- !u!114 &1003892790849814653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8955688176565902468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d99b072d5200246954f8187df88933, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColliderBridge
 --- !u!1001 &6441848815858378958
 PrefabInstance:
   m_ObjectHideFlags: 0

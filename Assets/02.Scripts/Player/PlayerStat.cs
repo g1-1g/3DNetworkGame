@@ -15,6 +15,8 @@ public class PlayerStat : MonoBehaviour
     public float StaminaDrainOnAttack;   // 공격 소모
     public float StaminaRecoveryRate; // 회복 속도
 
+    public float Damage;
+
     public float WalkSpeed;
     public float RunMultiplier;
 }

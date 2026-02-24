@@ -1,7 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IPunObservable
+public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
 {
     public PlayerStat Stat { get; private set; }
     public PhotonView PhotonView { get; private set; }
@@ -36,5 +36,11 @@ public class PlayerController : MonoBehaviour, IPunObservable
             Stat.Health = (float)stream.ReceiveNext();
             Stat.Stamina = (float)stream.ReceiveNext();
         }
+    }
+
+    public void TakeDamage(float Damage)
+    {
+        Stat.Health -= Damage;
+        Debug.Log("아프다");
     }
 }
