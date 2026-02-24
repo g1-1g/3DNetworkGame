@@ -23,6 +23,8 @@ public class PlayerMoveAbility : PlayerAbility
 
     private PlayerAnimator _animator;
 
+    public bool ShouldRun;
+
     protected override void Awake()
     {
         base.Awake();
@@ -75,10 +77,10 @@ public class PlayerMoveAbility : PlayerAbility
 
     private void SpeedUpdate(float moveScale)
     {
-        bool shouldRun = Input.GetKey(KeyCode.LeftShift) && _owner.Stat.Stamina > _owner.Stat.StaminaDrainOnRun;
+        ShouldRun = moveScale > 0 && Input.GetKey(KeyCode.LeftShift) && _owner.Stat.Stamina > _owner.Stat.StaminaDrainOnRun;
         float targetSpeed;
 
-        if (shouldRun)
+        if (ShouldRun)
         {
             targetSpeed = _owner.Stat.WalkSpeed * _owner.Stat.RunMultiplier;
             _owner.Stat.Stamina -= _owner.Stat.StaminaDrainOnRun * Time.deltaTime;
@@ -86,7 +88,6 @@ public class PlayerMoveAbility : PlayerAbility
         else
         {
             targetSpeed = _owner.Stat.WalkSpeed;
-            if (_owner.Stat.Stamina < _owner.Stat.MaxStamina) _owner.Stat.Stamina = Mathf.Min(_owner.Stat.Stamina + _owner.Stat.StaminaRecoveryRate * Time.deltaTime, _owner.Stat.MaxStamina);
         }
 
 

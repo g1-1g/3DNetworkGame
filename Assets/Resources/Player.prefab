@@ -1679,7 +1679,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2, y: 0.49}
+  m_SizeDelta: {x: 2, y: 0.34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4006595140555332837
 GameObject:
@@ -2504,6 +2504,7 @@ GameObject:
   - component: {fileID: 375519120386462072}
   - component: {fileID: 8458000837755117670}
   - component: {fileID: 6524680759735473095}
+  - component: {fileID: 873527368596599058}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2594,6 +2595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMoveAbility
   _speedChangeRate: 2
   _jumpForce: 10
+  ShouldRun: 0
 --- !u!114 &4259629110884797518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2665,9 +2667,9 @@ MonoBehaviour:
   StaminaDrainOnRun: 10
   StaminaDrainOnJump: 20
   StaminaDrainOnAttack: 10
-  StaminaRecoveryRate: 10
+  StaminaRecoveryRate: 5
   WalkSpeed: 5
-  RunMultiplier: 2
+  RunMultiplier: 3
 --- !u!114 &3416947767425930373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2765,6 +2767,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatsUIAbility
   _hpSlider: {fileID: 8278575009245636323}
   _staminaSlider: {fileID: 9028292518165613576}
+--- !u!114 &873527368596599058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5902022743216581123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89a7eb1dd8c4cca4ca0a987823accbdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStaminaRecoveryAbility
 --- !u!1 &6004280391353811118
 GameObject:
   m_ObjectHideFlags: 0
@@ -3054,7 +3068,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1.4, y: 0.3}
+  m_SizeDelta: {x: 0.81, y: 0.2}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &8278575009245636323
 MonoBehaviour:
@@ -3207,7 +3221,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1.4, y: 0.3}
+  m_SizeDelta: {x: 0.81, y: 0.2}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &9028292518165613576
 MonoBehaviour:

@@ -24,7 +24,7 @@ public class PlayerAnimator : MonoBehaviour
         _animator.SetTrigger(_attackTriggerHash);
     }
 
-    public void PlayAttack(AttackType type)
+    public void PlayAttack(EAttackType type)
     {
         _animator.SetInteger(_attackTypeHash, (int)type);
         SetAttackTrigger();

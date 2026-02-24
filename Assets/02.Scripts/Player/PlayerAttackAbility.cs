@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class PlayerAttackAbility : PlayerAbility
 {
-    public AttackMode AttackMode;
+    public EAttackMode AttackMode;
 
     private bool _isBuffered;
 
     private bool _isAttacking;
 
-    private AttackType _currentAttackType;
+    private EAttackType _currentAttackType;
     
     private PlayerAnimator _animator;
 
@@ -40,8 +40,8 @@ public class PlayerAttackAbility : PlayerAbility
 
             switch (AttackMode)
             {
-                case AttackMode.Sequential:
-                    if (_currentAttackType >= AttackType.Count - 1)
+                case EAttackMode.Sequential:
+                    if (_currentAttackType >= EAttackType.Count - 1)
                     {
                         _currentAttackType = 0;
                     }
@@ -51,8 +51,8 @@ public class PlayerAttackAbility : PlayerAbility
                     }
                         _animator.PlayAttack(_currentAttackType);
                     break;
-                case AttackMode.Random:
-                    _animator.PlayAttack((AttackType)UnityEngine.Random.Range(0, (int)AttackType.Count));
+                case EAttackMode.Random:
+                    _animator.PlayAttack((EAttackType)UnityEngine.Random.Range(0, (int)EAttackType.Count));
                     break;
             }
 

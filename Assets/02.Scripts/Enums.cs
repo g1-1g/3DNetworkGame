@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum AttackType
+public enum EAttackType
 {
     Attack1,
     Attack2, 
@@ -9,7 +9,7 @@ public enum AttackType
     Count
 }
 
-public enum AttackMode
+public enum EAttackMode
 {
     Sequential,
     Random,
