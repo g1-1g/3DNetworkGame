@@ -2611,6 +2611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRotateAbility
   CameraRoot: {fileID: 9149669967177865167}
   _rotationSpeed: 5
+  _playerContext: {fileID: 0}
 --- !u!114 &4200213901170162511
 MonoBehaviour:
   m_ObjectHideFlags: 0
