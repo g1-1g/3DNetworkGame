@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
         }
     }
 
+    [PunRPC]
     public void TakeDamage(float Damage)
     {
         Stat.Health -= Damage;

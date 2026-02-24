@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 public class PlayerWeaponAbility : PlayerAbility
@@ -35,7 +36,9 @@ public class PlayerWeaponAbility : PlayerAbility
 
         if (damageable == null) return;
 
-        damageable.TakeDamage(_owner.Stat.Damage);
+        PlayerController otherPlayer = other.gameObject.GetComponent<PlayerController>();
+
+        otherPlayer.PhotonView.RPC(nameof(damageable.TakeDamage), RpcTarget.All, _owner.Stat.Damage);
     }
 
     private void OnDestroy()

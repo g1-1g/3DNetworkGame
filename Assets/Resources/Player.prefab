@@ -2746,7 +2746,7 @@ MonoBehaviour:
     SynchronizeType: 2
     Name: Blend
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 0
     Name: Attack
   - Type: 3
     SynchronizeType: 1
