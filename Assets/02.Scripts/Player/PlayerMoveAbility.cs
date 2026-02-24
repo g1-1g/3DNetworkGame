@@ -12,6 +12,9 @@ public class PlayerMoveAbility : PlayerAbility
     private float _runMultiply = 2f;
 
     [SerializeField]
+    private float _staminaAmount = 1f;
+
+    [SerializeField]
     private float _speedChangeRate = 3;
 
     [SerializeField]
@@ -19,6 +22,7 @@ public class PlayerMoveAbility : PlayerAbility
 
 
     private float _moveSpeed;
+
     private float _speedOffset = 0.05f;
 
     private const float _gravity = 18f;
@@ -78,7 +82,20 @@ public class PlayerMoveAbility : PlayerAbility
 
     private void SpeedUpdate(float moveScale)
     {
-        float targetSpeed = Input.GetKey(KeyCode.LeftShift) ? _walkSpeed * _runMultiply : _walkSpeed;
+        bool shouldRun = Input.GetKey(KeyCode.LeftShift) && _owner.Stat.Stamina > _staminaAmount;
+        float targetSpeed;
+
+        if (shouldRun)
+        {
+            targetSpeed =  _walkSpeed * _runMultiply ;
+            _owner.Stat.Stamina -= _staminaAmount;
+        }
+        else
+        {
+            targetSpeed = _walkSpeed;
+            if (_owner.Stat.Stamina != _owner.Stat.MaxStamina) _owner.Stat.Stamina++;
+        }
+
 
         if (moveScale < 0.1f)
         {

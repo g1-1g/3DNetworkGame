@@ -2503,6 +2503,7 @@ GameObject:
   - component: {fileID: 913367859516821045}
   - component: {fileID: 375519120386462072}
   - component: {fileID: 8458000837755117670}
+  - component: {fileID: 6524680759735473095}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2593,6 +2594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMoveAbility
   _walkSpeed: 7
   _runMultiply: 2
+  _staminaAmount: 1
   _speedChangeRate: 2
   _jumpForce: 10
 --- !u!114 &4259629110884797518
@@ -2658,6 +2660,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df42aa24455bf34288fac92d3994271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStat
+  Health: 100
+  MaxHealth: 100
+  Stamina: 100
+  MaxStamina: 100
 --- !u!114 &3416947767425930373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2740,6 +2746,20 @@ MonoBehaviour:
     LayerIndex: 0
   - SynchronizeType: 1
     LayerIndex: 1
+--- !u!114 &6524680759735473095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5902022743216581123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fb097536e0d85f44a2d543f5b1b07e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatsUIAbility
+  _hpSlider: {fileID: 8278575009245636323}
+  _staminaSlider: {fileID: 9028292518165613576}
 --- !u!1 &6004280391353811118
 GameObject:
   m_ObjectHideFlags: 0
