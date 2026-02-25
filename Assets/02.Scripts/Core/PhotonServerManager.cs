@@ -11,7 +11,6 @@ public class PhotonServerManager : MonoBehaviourPunCallbacks
     // - 서버 접속 성공 / 실패
     // - 방 입장 성공 / 실패
     // - 누군가 방에 입장 등등 ...
-    public PlayerContext PlayerContext;
 
     private string _version = "0.0.1";
     private string _nickName = "G1";
@@ -77,10 +76,8 @@ public class PhotonServerManager : MonoBehaviourPunCallbacks
             Debug.Log(player.NickName);
         }
 
-        // 리소스 폴더에서 "Player" 이름을 가진 프리팹을 생성하고, 서버에 등록함
-        // 리소스 폴더는 좋지 않음 => 다른 방법을 찾아보자
-        GameObject prefab = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
-        PlayerContext.SetPlayer(prefab);
+        
+        SpawnManager.Instance.Spawn();
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
