@@ -14,7 +14,8 @@ public class PhotonRoomManager : MonoBehaviourPunCallbacks
 
 
     public event Action OnDataChanged;
-    
+    public event Action<Player> OnPlayerEnter;
+    public event Action<Player> OnPlayerLeft;
 
     protected void Awake()
     {
@@ -57,4 +58,17 @@ public class PhotonRoomManager : MonoBehaviourPunCallbacks
         // 룸 만들기
         PhotonNetwork.CreateRoom("test", roomOptions);
     }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        OnDataChanged?.Invoke();
+        OnPlayerEnter?.Invoke(newPlayer);
+    }
+
+    public override void OnPlayerLeftRoom(Player newPlayer)
+    {
+        OnDataChanged?.Invoke();
+        OnPlayerLeft?.Invoke(newPlayer);
+    }
+
 }
