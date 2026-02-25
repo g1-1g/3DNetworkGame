@@ -21,3 +21,10 @@ public enum EGameState
     Game,
     Dead,
 }
+
+public enum EDieType
+{
+    InstantRespawn,
+    DelayedRespawn,
+    GameOver,
+}

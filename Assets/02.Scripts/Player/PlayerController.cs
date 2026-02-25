@@ -1,7 +1,6 @@
 using System;
 using Photon.Pun;
 using UnityEngine;
-using static UnityEngine.UI.GridLayoutGroup;
 
 public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
 {
@@ -14,7 +13,7 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
 
     public EGameState GameState => _gameState;
 
-    public event Action OnDie;
+    public event Action<EDieType> OnDie;
 
     void Awake()
     {
@@ -66,24 +65,23 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
 
         if (Stat.Health <= 0)
         {
-            Debug.Log("죽음");
-            SetGameState (EGameState.Dead);
-            PhotonView.RPC(nameof(Animator.SetDieTrigger), RpcTarget.All);
+            Kill(EDieType.DelayedRespawn);
         }
+    }
+
+    public void Kill(EDieType type)
+    {
+        if (!PhotonView.IsMine) return;
+
+        Stat.SetHealth(0);
+        SetGameState(EGameState.Dead);
+        PhotonView.RPC(nameof(Animator.SetDieTrigger), RpcTarget.All);
+
+        OnDie?.Invoke(type);
     }
 
     public void SetGameState(EGameState state)
     {
-        switch (state)
-        {
-            case EGameState.Dead:
-                OnDie?.Invoke();
-                break;
-            case EGameState.Ready:  
-                break;
-            case EGameState.Game:           
-                break;
-        }
         _gameState = state;
     }
 

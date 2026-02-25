@@ -39,9 +39,18 @@ public class SpawnManager : LocalSingleton<SpawnManager>
         RespawnNow();
     }
 
-    public void HandlePlayerDie()
+    public void HandlePlayerDie(EDieType type)
     {
-        StartCoroutine(RespawnCoroutine());
+        switch (type)
+        {
+            case EDieType.DelayedRespawn:
+                StartCoroutine(RespawnCoroutine());
+                break;
+            case EDieType.InstantRespawn:
+                RespawnNow();
+                break;
+        }
+        
     }
 
     public void RespawnNow()
@@ -55,7 +64,20 @@ public class SpawnManager : LocalSingleton<SpawnManager>
         }
 
         Vector3 spawnPos = SpawnPositions[UnityEngine.Random.Range(0, SpawnPositions.Length)].position;
+
+
+        var cc = prefab.GetComponent<CharacterController>();
+        if (cc != null)
+        {
+            cc.enabled = false;
+        }
+
         prefab.transform.position = spawnPos;
+
+        if (cc != null)
+        {
+            cc.enabled = true;
+        }
 
         OnRespawn?.Invoke();
     }
