@@ -80,6 +80,8 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
         SetGameState(EGameState.Dead);
         PhotonView.RPC(nameof(Animator.SetDieTrigger), RpcTarget.All);
 
+        ItemSpawnManager.Instance.Spawn(transform.position);
+
         OnDie?.Invoke(type);
     }
 

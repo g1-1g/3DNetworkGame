@@ -50,7 +50,12 @@ public class SpawnManager : LocalSingleton<SpawnManager>
                 RespawnNow();
                 break;
         }
-        
+
+        var cc = prefab.GetComponent<CharacterController>();
+        if (cc != null)
+        {
+            cc.enabled = false;
+        }
     }
 
     public void RespawnNow()

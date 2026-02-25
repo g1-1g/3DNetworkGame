@@ -2760,6 +2760,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 0
     Name: Die
+  - Type: 9
+    SynchronizeType: 0
+    Name: Respawn
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
