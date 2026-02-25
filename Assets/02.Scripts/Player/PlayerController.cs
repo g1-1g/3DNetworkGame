@@ -1,3 +1,4 @@
+using System;
 using Photon.Pun;
 using UnityEngine;
 using static UnityEngine.UI.GridLayoutGroup;
@@ -7,18 +8,26 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
     public PlayerStat Stat { get; private set; }
     public PhotonView PhotonView { get; private set; }
 
-    private PlayerAnimator _animator;
+    public PlayerAnimator Animator { get; private set; }
 
     private EGameState _gameState;
 
     public EGameState GameState => _gameState;
+
+    public event Action OnDie;
+
     void Awake()
     {
         Stat = GetComponent<PlayerStat>();
         PhotonView = GetComponent<PhotonView>();
-        _animator = GetComponent<PlayerAnimator>();
+        Animator = GetComponent<PlayerAnimator>();
 
         SetGameState(EGameState.Game);
+    }
+
+    void Start()
+    {
+        SpawnManager.Instance.OnRespawn += ReSpawn;
     }
 
 
@@ -59,12 +68,38 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
         {
             Debug.Log("죽음");
             SetGameState (EGameState.Dead);
-            PhotonView.RPC(nameof(_animator.SetDieTrigger), RpcTarget.All);
+            PhotonView.RPC(nameof(Animator.SetDieTrigger), RpcTarget.All);
         }
     }
 
     public void SetGameState(EGameState state)
     {
+        switch (state)
+        {
+            case EGameState.Dead:
+                OnDie?.Invoke();
+                break;
+            case EGameState.Ready:  
+                break;
+            case EGameState.Game:           
+                break;
+        }
         _gameState = state;
+    }
+
+    public void ReSpawn()
+    {
+        Stat.Init();
+
+        if (!PhotonView.IsMine) return;
+
+        PhotonView.RPC(nameof(Animator.SetRespawnTrigger), RpcTarget.All);
+
+        SetGameState(EGameState.Game);  
+    }
+
+    private void OnDestroy()
+    {
+        SpawnManager.Instance.OnRespawn -= ReSpawn;
     }
 }

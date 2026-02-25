@@ -7273,6 +7273,7 @@ MonoBehaviour:
   - {fileID: 1615524018}
   - {fileID: 135768778}
   PlayerContext: {fileID: 993398969}
+  RespawnTime: 5
 --- !u!4 &946044499
 Transform:
   m_ObjectHideFlags: 0

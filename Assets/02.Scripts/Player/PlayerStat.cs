@@ -24,6 +24,12 @@ public class PlayerStat : MonoBehaviour
     public float Health => _health;
     public float Stamina => _stamina;
 
+    public void Init()
+    {
+        _health = _maxHealth;
+        _stamina = _maxStamina;
+    }
+
     #region Health
     public float GetHealthRatio()
     {
