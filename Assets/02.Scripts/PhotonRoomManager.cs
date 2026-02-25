@@ -16,7 +16,7 @@ public class PhotonRoomManager : MonoBehaviourPunCallbacks
     public event Action OnDataChanged;
     public event Action<Player> OnPlayerEnter;
     public event Action<Player> OnPlayerLeft;
-
+    public event Action<string, string> OnPlayerDied;
     protected void Awake()
     {
         if (Instance != null)
@@ -69,6 +69,15 @@ public class PhotonRoomManager : MonoBehaviourPunCallbacks
     {
         OnDataChanged?.Invoke();
         OnPlayerLeft?.Invoke(newPlayer);
+    }
+
+    [PunRPC]
+    public void NotifyPlayerDeath(int attackerActorNumber)
+    {
+        string attackerNickName = _room.Players[attackerActorNumber].NickName;
+        string victimNickName = PhotonNetwork.LocalPlayer.NickName;
+
+        OnPlayerDied?.Invoke(attackerNickName, victimNickName);
     }
 
 }

@@ -55,16 +55,19 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
     }
 
     [PunRPC]
-    public void TakeDamage(float Damage)
+    public void TakeDamage(float damage, int attackerActorNumber)
     {
-        if (!PhotonView.IsMine) return;
+        
         if (GameState != EGameState.Game) return;
 
-        Stat.ConsumeHealth(Damage);
+        if (!PhotonView.IsMine) return;
+
+        Stat.ConsumeHealth(damage);
         Debug.Log("아프다");
 
         if (Stat.Health <= 0)
         {
+            PhotonRoomManager.Instance.NotifyPlayerDeath(attackerActorNumber);
             Kill(EDieType.DelayedRespawn);
         }
     }
