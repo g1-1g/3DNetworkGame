@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
-using Unity.Cinemachine;
 using UnityEngine;
 
 public class PhotonServerManager : MonoBehaviourPunCallbacks
@@ -11,21 +10,14 @@ public class PhotonServerManager : MonoBehaviourPunCallbacks
     // - 서버 접속 성공 / 실패
     // - 방 입장 성공 / 실패
     // - 누군가 방에 입장 등등 ...
-    public PlayerContext PlayerContext;
 
     private string _version = "0.0.1";
     private string _nickName = "G1";
 
     private void Start()
     {
-        _nickName = $"{UnityEngine.Random.Range(0, 999)}";
-
         PhotonNetwork.GameVersion = _version;
         PhotonNetwork.NickName = _nickName;
-
-        PhotonNetwork.SendRate = 30; // 얼마나 자주 데이터를 송수신할 것인지 (실제 송수신)
-        PhotonNetwork.SerializationRate = 30; // 얼마나 자주 데이터를 직렬화 할 것인지 (송수신 준비)
-
 
         // 방장이 로드한 씬 게임에 다른 유저들도 똑같이 그 씬을 로드하도록 동기화
         // 방장 (마스터 클라이언트) : 방을 만든 '소유자' (방에는 하나의 마스터 클라이언트가 존재)
@@ -76,11 +68,6 @@ public class PhotonServerManager : MonoBehaviourPunCallbacks
         {
             Debug.Log(player.NickName);
         }
-
-        // 리소스 폴더에서 "Player" 이름을 가진 프리팹을 생성하고, 서버에 등록함
-        // 리소스 폴더는 좋지 않음 => 다른 방법을 찾아보자
-        GameObject prefab = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
-        PlayerContext.SetPlayer(prefab);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
