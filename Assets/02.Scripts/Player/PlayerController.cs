@@ -8,11 +8,17 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
     public PhotonView PhotonView { get; private set; }
 
     private PlayerAnimator _animator;
+
+    private EGameState _gameState;
+
+    public EGameState GameState => _gameState;
     void Awake()
     {
         Stat = GetComponent<PlayerStat>();
         PhotonView = GetComponent<PhotonView>();
         _animator = GetComponent<PlayerAnimator>();
+
+        SetGameState(EGameState.Game);
     }
 
 
@@ -44,6 +50,7 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
     public void TakeDamage(float Damage)
     {
         if (!PhotonView.IsMine) return;
+        if (GameState != EGameState.Game) return;
 
         Stat.ConsumeHealth(Damage);
         Debug.Log("아프다");
@@ -51,7 +58,13 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
         if (Stat.Health <= 0)
         {
             Debug.Log("죽음");
+            SetGameState (EGameState.Dead);
             PhotonView.RPC(nameof(_animator.SetDieTrigger), RpcTarget.All);
         }
+    }
+
+    public void SetGameState(EGameState state)
+    {
+        _gameState = state;
     }
 }

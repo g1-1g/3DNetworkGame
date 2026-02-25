@@ -24,6 +24,7 @@ public class PlayerAttackAbility : PlayerAbility
     void Update()
     {
         if (!_owner.PhotonView.IsMine) return;
+        if (_owner.GameState != EGameState.Game) return;
 
         if (Input.GetMouseButtonDown(0) || _isBuffered)
         {

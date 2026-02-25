@@ -14,3 +14,10 @@ public enum EAttackMode
     Sequential,
     Random,
 }
+
+public enum EGameState
+{
+    Ready,
+    Game,
+    Dead,
+}
