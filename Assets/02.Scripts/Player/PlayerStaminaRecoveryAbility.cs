@@ -14,9 +14,10 @@ public class PlayerStaminaRecoveryAbility : PlayerAbility
     {
         if (moveAbility == null || moveAbility.ShouldRun) return;
 
-        if (_owner.Stat.Stamina < _owner.Stat.MaxStamina)
+        if (_owner.Stat.GetStaminaRatio() < 1)
         {
-            _owner.Stat.Stamina = Mathf.Min(_owner.Stat.Stamina + _owner.Stat.StaminaRecoveryRate * Time.deltaTime, _owner.Stat.MaxStamina);
+            _owner.Stat.RegenStamina(_owner.Stat.StaminaRecoveryRate * Time.deltaTime);
+
         }
     }
 }

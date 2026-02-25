@@ -8,8 +8,8 @@ public class PlayerStatsUIAbility : PlayerAbility
 
     void Update()
     {
-        _hpSlider.value = _owner.Stat.Health / _owner.Stat.MaxHealth;
+        _hpSlider.value = _owner.Stat.GetHealthRatio();
 
-        _staminaSlider.value = _owner.Stat.Stamina / _owner.Stat.MaxStamina;
+        _staminaSlider.value = _owner.Stat.GetStaminaRatio();
     }
 }

@@ -6,10 +6,13 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
 {
     public PlayerStat Stat { get; private set; }
     public PhotonView PhotonView { get; private set; }
+
+    private PlayerAnimator _animator;
     void Awake()
     {
         Stat = GetComponent<PlayerStat>();
         PhotonView = GetComponent<PhotonView>();
+        _animator = GetComponent<PlayerAnimator>();
     }
 
 
@@ -32,8 +35,8 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
 
             // 보낸 순서대로 받는다
             // 보낼 데이터가 많은 경우 Json으로 변환하여 받는다
-            Stat.Health = (float)stream.ReceiveNext();
-            Stat.Stamina = (float)stream.ReceiveNext();
+            Stat.SetHealth ((float)stream.ReceiveNext());
+            Stat.SetStamina((float)stream.ReceiveNext());
         }
     }
 
@@ -42,7 +45,13 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
     {
         if (!PhotonView.IsMine) return;
 
-        Stat.Health -= Damage;
+        Stat.ConsumeHealth(Damage);
         Debug.Log("아프다");
+
+        if (Stat.Health <= 0)
+        {
+            Debug.Log("죽음");
+            PhotonView.RPC(nameof(_animator.SetDieTrigger), RpcTarget.All);
+        }
     }
 }

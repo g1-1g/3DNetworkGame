@@ -33,11 +33,11 @@ public class PlayerAttackAbility : PlayerAbility
                 return; 
             }
 
-            if (_owner.Stat.Stamina < _owner.Stat.StaminaDrainOnAttack) return;
+            if (!_owner.Stat.CanAttack()) return;
 
             _isAttacking = true;
 
-            _owner.Stat.Stamina -= _owner.Stat.StaminaDrainOnAttack;
+            _owner.Stat.ConsumeStamina(_owner.Stat.StaminaDrainOnAttack);
 
             switch (AttackMode)
             {
