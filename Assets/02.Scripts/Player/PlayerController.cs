@@ -1,5 +1,6 @@
 using Photon.Pun;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
 {
@@ -21,14 +22,12 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
         // 읽기 / 쓰기 모드
         if (stream.IsWriting)
         {
-            Debug.Log("전송중 ...");
             // 이 PhotonView의 데이터를 보내줘야 하는 상황
             stream.SendNext(Stat.Health);
             stream.SendNext(Stat.Stamina);
         }
         if (stream.IsReading)
         {
-            Debug.Log("수신중 ...");
             // 이 PhotonView의 데이터를 받아야 하는 상황
 
             // 보낸 순서대로 받는다
@@ -41,6 +40,8 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
     [PunRPC]
     public void TakeDamage(float Damage)
     {
+        if (!PhotonView.IsMine) return;
+
         Stat.Health -= Damage;
         Debug.Log("아프다");
     }

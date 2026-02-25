@@ -30,6 +30,7 @@ public class PlayerWeaponAbility : PlayerAbility
 
     private void HandleTrigger(Collider other)
     {
+        if (!_owner.PhotonView.IsMine) return;
         if (other.transform == _owner.transform) return;
 
         IDamageable damageable = other.gameObject.GetComponent<IDamageable>();
