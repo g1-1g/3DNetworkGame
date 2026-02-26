@@ -9,7 +9,7 @@ public class SpawnManager : LocalSingleton<SpawnManager>
     public PlayerContext PlayerContext;
     public float RespawnTime = 5f;
 
-    private GameObject prefab;
+    private GameObject _player;
 
     public event Action OnRespawn;
     public void Spawn()
@@ -24,12 +24,12 @@ public class SpawnManager : LocalSingleton<SpawnManager>
 
         // 리소스 폴더에서 "Player" 이름을 가진 프리팹을 생성하고, 서버에 등록함
         // 리소스 폴더는 좋지 않음 => 다른 방법을 찾아보자
-        prefab = PhotonNetwork.Instantiate("Player", spawnPos, Quaternion.identity);
+        _player = PhotonNetwork.Instantiate("Player", spawnPos, Quaternion.identity);
 
-        if (prefab == null) return;
-        prefab.GetComponent<PlayerController>().OnDie += HandlePlayerDie;
-
-        PlayerContext.SetPlayer(prefab);
+        if (_player == null) return;
+        _player.GetComponent<PlayerController>().OnDie += HandlePlayerDie;
+        
+        PlayerContext.SetPlayer(_player);
     }
 
     public IEnumerator RespawnCoroutine()
@@ -49,18 +49,12 @@ public class SpawnManager : LocalSingleton<SpawnManager>
             case EDieType.InstantRespawn:
                 RespawnNow();
                 break;
-        }
-
-        var cc = prefab.GetComponent<CharacterController>();
-        if (cc != null)
-        {
-            cc.enabled = false;
-        }
+        }  
     }
 
     public void RespawnNow()
     {
-        if (prefab == null) return;
+        if (_player == null) return;
 
         if (SpawnPositions == null)
         {
@@ -71,13 +65,13 @@ public class SpawnManager : LocalSingleton<SpawnManager>
         Vector3 spawnPos = SpawnPositions[UnityEngine.Random.Range(0, SpawnPositions.Length)].position;
 
 
-        var cc = prefab.GetComponent<CharacterController>();
+        var cc = _player.GetComponent<CharacterController>();
         if (cc != null)
         {
             cc.enabled = false;
         }
 
-        prefab.transform.position = spawnPos;
+        _player.transform.position = spawnPos;
 
         if (cc != null)
         {
@@ -91,7 +85,7 @@ public class SpawnManager : LocalSingleton<SpawnManager>
     {
         base.OnDestroy();
 
-        if (prefab == null) return;
-        prefab.GetComponent<PlayerController>().OnDie -= HandlePlayerDie;
+        if (_player == null) return;
+        _player.GetComponent<PlayerController>().OnDie -= HandlePlayerDie;
     }
 }

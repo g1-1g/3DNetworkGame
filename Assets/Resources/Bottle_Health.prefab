@@ -9783,6 +9783,8 @@ GameObject:
   - component: {fileID: 7949143183364566233}
   - component: {fileID: 2007755956182116525}
   - component: {fileID: 4053686063108666630}
+  - component: {fileID: -7555044496776673931}
+  - component: {fileID: -4314304532503453473}
   m_Layer: 0
   m_Name: Bottle_Health
   m_TagString: Untagged
@@ -9865,8 +9867,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.23
-  m_Height: 0.74
+  m_Radius: 0.09
+  m_Height: 0.47
   m_Direction: 1
   m_Center: {x: 0, y: 1.1, z: 0}
 --- !u!54 &4053686063108666630
@@ -9896,3 +9898,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &-7555044496776673931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012970591572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52b99be52dc5b134f886943bb6858aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemObject
+--- !u!136 &-4314304532503453473
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012970591572}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.34
+  m_Height: 0.74
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.1, z: 0}

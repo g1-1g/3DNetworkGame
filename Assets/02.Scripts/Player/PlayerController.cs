@@ -21,14 +21,13 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
         PhotonView = GetComponent<PhotonView>();
         Animator = GetComponent<PlayerAnimator>();
 
-        SetGameState(EGameState.Game);
+        PhotonView.RPC(nameof(SetGameState), RpcTarget.All, EGameState.Game);
     }
 
     void Start()
     {
         SpawnManager.Instance.OnRespawn += ReSpawn;
     }
-
 
     // 데이터 동기화를 위한 데이터 읽기(전송), 쓰기(수신) 메서드. 자동으로 호출됨
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -77,14 +76,14 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
         if (!PhotonView.IsMine) return;
 
         Stat.SetHealth(0);
-        SetGameState(EGameState.Dead);
+        PhotonView.RPC(nameof(SetGameState), RpcTarget.All, EGameState.Dead);
         PhotonView.RPC(nameof(Animator.SetDieTrigger), RpcTarget.All);
 
-        ItemSpawnManager.Instance.Spawn(transform.position);
-
         OnDie?.Invoke(type);
+        ItemSpawnManager.Instance.RequestMakeItems(transform.position);
     }
 
+    [PunRPC]
     public void SetGameState(EGameState state)
     {
         _gameState = state;
@@ -98,7 +97,7 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
 
         PhotonView.RPC(nameof(Animator.SetRespawnTrigger), RpcTarget.All);
 
-        SetGameState(EGameState.Game);  
+        PhotonView.RPC(nameof(SetGameState), RpcTarget.All, EGameState.Game);  
     }
 
     private void OnDestroy()
