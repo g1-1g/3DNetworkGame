@@ -9878,6 +9878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b99be52dc5b134f886943bb6858aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemObject
+  _scoreValue: 1
 --- !u!136 &2449272958381446136
 CapsuleCollider:
   m_ObjectHideFlags: 0

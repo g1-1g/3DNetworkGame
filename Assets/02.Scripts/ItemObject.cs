@@ -1,12 +1,11 @@
 using Photon.Pun;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ItemObject : MonoBehaviour
 {
     private PhotonView _view;
     private bool _destroyRequested;
+    [SerializeField] private int _scoreValue = 1;
 
     private void Awake()
     {
@@ -28,6 +27,11 @@ public class ItemObject : MonoBehaviour
             if (controller.GameState != EGameState.Game) return;
 
             _destroyRequested = true;
+
+            if (controller.PhotonView != null && controller.PhotonView.IsMine)
+            {
+                PlayerScore.AddLocalScore(_scoreValue);
+            }
 
             if (_view != null && _view.IsMine)
             {

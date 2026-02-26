@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -17,6 +17,8 @@ public class PhotonRoomManager : MonoBehaviourPunCallbacks
     public event Action<Player> OnPlayerEnter;
     public event Action<Player> OnPlayerLeft;
     public event Action<string, string> OnPlayerDied;
+
+    public event Action<Player, int> OnPlayerScoreChanged;
     protected void Awake()
     {
         if (Instance != null)
@@ -38,6 +40,8 @@ public class PhotonRoomManager : MonoBehaviourPunCallbacks
         Debug.Log($"플레이어 인원 : {PhotonNetwork.CurrentRoom.PlayerCount}");
 
         _room = PhotonNetwork.CurrentRoom;
+
+        PlayerScore.EnsureLocalScore();
 
         OnDataChanged?.Invoke();
 
@@ -71,6 +75,15 @@ public class PhotonRoomManager : MonoBehaviourPunCallbacks
         OnPlayerLeft?.Invoke(newPlayer);
     }
 
+    public override void OnPlayerPropertiesUpdate(Player target, Hashtable changedProps)
+    {
+        if (changedProps.ContainsKey(PlayerScore.ScoreKey))
+        {
+            int score = PlayerScore.GetScore(target);
+            OnPlayerScoreChanged?.Invoke(target, score);
+        }
+    }
+
     [PunRPC]
     public void NotifyPlayerDeath(int attackerActorNumber)
     {
@@ -79,5 +92,6 @@ public class PhotonRoomManager : MonoBehaviourPunCallbacks
 
         OnPlayerDied?.Invoke(attackerNickName, victimNickName);
     }
+
 
 }

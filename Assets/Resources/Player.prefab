@@ -2669,7 +2669,7 @@ MonoBehaviour:
   StaminaDrainOnRun: 10
   StaminaDrainOnJump: 10
   StaminaDrainOnAttack: 10
-  StaminaRecoveryRate: 1
+  StaminaRecoveryRate: 5
   Damage: 20
   WalkSpeed: 5
   RunMultiplier: 3
