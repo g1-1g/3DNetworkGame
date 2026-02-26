@@ -19473,6 +19473,7 @@ GameObject:
   - component: {fileID: 4865415211939407084}
   - component: {fileID: 4865415211939407086}
   - component: {fileID: 4865415211939407087}
+  - component: {fileID: 4865415211939407088}
   m_Layer: 0
   m_Name: Score
   m_TagString: Untagged
@@ -19520,6 +19521,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &4865415211939407088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4865415211939407085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31eb1019e540ae34e9327fe19fe0ba4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_Score
+  _scoreText: {fileID: 4865415211119981023}
+  _nickNameText: {fileID: 4865415211317963284}
 --- !u!1 &4865415211994935154
 GameObject:
   m_ObjectHideFlags: 0
