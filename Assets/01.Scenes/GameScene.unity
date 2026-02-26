@@ -15558,6 +15558,7 @@ GameObject:
   - component: {fileID: 1911391890}
   - component: {fileID: 1911391889}
   - component: {fileID: 1911391891}
+  - component: {fileID: 1911391892}
   m_Layer: 0
   m_Name: ItemSpawnManager
   m_TagString: Untagged
@@ -15581,6 +15582,8 @@ MonoBehaviour:
   - {fileID: 1000013846074356, guid: 414148d8f0f57ce48adae8ac014d4a45, type: 3}
   - {fileID: 1000012970591572, guid: 85b4c0f96f9796943900cfa468222493, type: 3}
   - {fileID: 1000013317980782, guid: 188b84e9747dc5649bdcc019bccc6701, type: 3}
+  _autoDropInterval: 5
+  _autoDropEnabled: 1
 --- !u!4 &1911391890
 Transform:
   m_ObjectHideFlags: 0
@@ -15618,6 +15621,27 @@ MonoBehaviour:
   sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!65 &1911391892
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911391888}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 100, y: 1, z: 100}
+  m_Center: {x: 0, y: 30, z: 0}
 --- !u!1001 &1914516822
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19459,7 +19483,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -329.2, y: -43.3}
+  m_AnchoredPosition: {x: -329.19995, y: -43.30005}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &4865415211939407085

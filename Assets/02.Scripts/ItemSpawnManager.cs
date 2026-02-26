@@ -1,15 +1,28 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ItemSpawnManager : LocalSingleton<ItemSpawnManager>
 {
     [SerializeField] private GameObject[] items;
     private PhotonView _photonView;
 
+    [SerializeField] private float _autoDropInterval;
+    [SerializeField] private bool _autoDropEnabled = true;
+
+    private BoxCollider _autoDropArea;
+    private float _autoDropTimer;
+
     protected override void Awake()
     {
         base.Awake();
         _photonView = GetComponent<PhotonView>();
+        _autoDropArea = GetComponent<BoxCollider>();
+    }
+
+    private void Update()
+    {
+        HandleAutoDropTimer(Time.deltaTime);
     }
 
     // 우리의 약속 : 방장에게 룸 관련해서 뭔가 요청을 할 때는 메서드 명에 Request로 시작하는 것이 유지보수면에서 유리
@@ -60,6 +73,35 @@ public class ItemSpawnManager : LocalSingleton<ItemSpawnManager>
             float force = Random.Range(4f, 7f);
             rb.AddForce(randomDir * force, ForceMode.Impulse);
         }
+    }
+
+    private void HandleAutoDropTimer(float deltaTime)
+    {
+        if (!_autoDropEnabled) return;
+        if (_autoDropInterval <= 0f) return;
+        if (_autoDropArea == null) return;
+        if (!PhotonNetwork.IsMasterClient) return;
+
+        _autoDropTimer += deltaTime;
+        if (_autoDropTimer < _autoDropInterval) return;
+
+        _autoDropTimer -= _autoDropInterval;
+
+        var spawnPos = GetRandomPointInBox(_autoDropArea);
+        Spawn(spawnPos);
+    }
+
+    private Vector3 GetRandomPointInBox(BoxCollider box)
+    {
+        var bounds = box.bounds;
+        var min = bounds.min;
+        var max = bounds.max;
+
+        return new Vector3(
+            UnityEngine.Random.Range(min.x, max.x),
+            UnityEngine.Random.Range(min.y, max.y),
+            UnityEngine.Random.Range(min.z, max.z)
+        );
     }
 
 }
