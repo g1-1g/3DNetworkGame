@@ -9,9 +9,18 @@ public class SpawnManager : LocalSingleton<SpawnManager>
     public PlayerContext PlayerContext;
     public float RespawnTime = 5f;
 
+    private BoxCollider _spawnArea;
+
     private GameObject _player;
 
     public event Action OnRespawn;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _spawnArea = GetComponent<BoxCollider>();
+    }
     public void Spawn()
     {
         if (SpawnPositions == null)
@@ -20,7 +29,8 @@ public class SpawnManager : LocalSingleton<SpawnManager>
             return;
         }
 
-        Vector3 spawnPos = SpawnPositions[UnityEngine.Random.Range(0, SpawnPositions.Length)].position;
+        //Vector3 spawnPos = SpawnPositions[UnityEngine.Random.Range(0, SpawnPositions.Length)].position;
+        Vector3 spawnPos = GetRandomPointInBox(_spawnArea);
 
         // 리소스 폴더에서 "Player" 이름을 가진 프리팹을 생성하고, 서버에 등록함
         // 리소스 폴더는 좋지 않음 => 다른 방법을 찾아보자
@@ -62,8 +72,8 @@ public class SpawnManager : LocalSingleton<SpawnManager>
             return;
         }
 
-        Vector3 spawnPos = SpawnPositions[UnityEngine.Random.Range(0, SpawnPositions.Length)].position;
-
+        //Vector3 spawnPos = SpawnPositions[UnityEngine.Random.Range(0, SpawnPositions.Length)].position;
+        Vector3 spawnPos = GetRandomPointInBox(_spawnArea);
 
         var cc = _player.GetComponent<CharacterController>();
         if (cc != null)
@@ -87,5 +97,18 @@ public class SpawnManager : LocalSingleton<SpawnManager>
 
         if (_player == null) return;
         _player.GetComponent<PlayerController>().OnDie -= HandlePlayerDie;
+    }
+
+    private Vector3 GetRandomPointInBox(BoxCollider box)
+    {
+        var bounds = box.bounds;
+        var min = bounds.min;
+        var max = bounds.max;
+
+        return new Vector3(
+            UnityEngine.Random.Range(min.x, max.x),
+            UnityEngine.Random.Range(min.y, max.y),
+            UnityEngine.Random.Range(min.z, max.z)
+        );
     }
 }
