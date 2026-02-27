@@ -17408,7 +17408,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 16
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -19383,10 +19383,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4865415210586779543}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -74.8, y: 0}
-  m_SizeDelta: {x: 180, y: 74.16}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 165.3, y: 0}
+  m_SizeDelta: {x: 300, y: 74.16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4865415211317963287
 CanvasRenderer:
@@ -19810,7 +19810,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &4865415212090861524
 MonoBehaviour:
   m_ObjectHideFlags: 0
