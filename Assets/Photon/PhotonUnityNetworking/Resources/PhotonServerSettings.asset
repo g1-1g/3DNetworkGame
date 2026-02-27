@@ -48,6 +48,8 @@ MonoBehaviour:
   - Spawn
   - RequestDestroy
   - SetGameState
+  - SetAttackTrigger
+  - SetGetHitTrigger
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -12,6 +12,7 @@ public class PlayerAnimator : MonoBehaviour
     private readonly int _reactionTriggerHash = Animator.StringToHash("Reaction");
     private readonly int _reactionTypeHash = Animator.StringToHash("ReactionType");
     private readonly int _dieTriggerHash = Animator.StringToHash("Die");
+    private readonly int _getHitTriggerHash = Animator.StringToHash("GetHit");
     private readonly int _respawnTriggerHash = Animator.StringToHash("Respawn");
 
     private void Awake()
@@ -32,6 +33,12 @@ public class PlayerAnimator : MonoBehaviour
     public void SetReactionTrigger()
     {
         _animator.SetTrigger(_reactionTriggerHash);
+    }
+
+    [PunRPC]
+    public void SetGetHitTrigger()
+    {
+        _animator.SetTrigger(_getHitTriggerHash);
     }
 
     public void PlayReaction(int type)

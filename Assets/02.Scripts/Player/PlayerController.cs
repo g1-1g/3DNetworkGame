@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
 
         Stat.ConsumeHealth(damage);
         Debug.Log("아프다");
+        PhotonView.RPC(nameof(Animator.SetGetHitTrigger), RpcTarget.All);
 
         if (Stat.Health <= 0)
         {
