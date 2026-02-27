@@ -24,6 +24,7 @@ public class PlayerAttackAbility : PlayerAbility
     void Update()
     {
         if (!_owner.PhotonView.IsMine) return;
+        if (_owner.GameState != EGameState.Game) return;
 
         if (Input.GetMouseButtonDown(0) || _isBuffered)
         {
@@ -33,11 +34,11 @@ public class PlayerAttackAbility : PlayerAbility
                 return; 
             }
 
-            if (_owner.Stat.Stamina < _owner.Stat.StaminaDrainOnAttack) return;
+            if (!_owner.Stat.CanAttack()) return;
 
             _isAttacking = true;
 
-            _owner.Stat.Stamina -= _owner.Stat.StaminaDrainOnAttack;
+            _owner.Stat.ConsumeStamina(_owner.Stat.StaminaDrainOnAttack);
 
             switch (AttackMode)
             {

@@ -41,6 +41,13 @@ MonoBehaviour:
   - RespawnSpaceship
   - PlayerAttackAnimation
   - TakeDamage
+  - SetDieTrigger
+  - SetIsDie
+  - SetRespawnTrigger
+  - NotifyPlayerDeath
+  - Spawn
+  - RequestDestroy
+  - SetGameState
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

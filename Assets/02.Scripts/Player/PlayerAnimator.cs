@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -10,6 +11,8 @@ public class PlayerAnimator : MonoBehaviour
     private readonly int _attackTypeHash = Animator.StringToHash("AttackType");
     private readonly int _reactionTriggerHash = Animator.StringToHash("Reaction");
     private readonly int _reactionTypeHash = Animator.StringToHash("ReactionType");
+    private readonly int _dieTriggerHash = Animator.StringToHash("Die");
+    private readonly int _respawnTriggerHash = Animator.StringToHash("Respawn");
 
     private void Awake()
     {
@@ -41,6 +44,18 @@ public class PlayerAnimator : MonoBehaviour
     {
         _animator.SetInteger(_attackTypeHash, (int)type);
         SetAttackTrigger();
+    }
+
+    [PunRPC]
+    public void SetDieTrigger()
+    {
+        _animator.SetTrigger(_dieTriggerHash);
+    }
+
+    [PunRPC]
+    public void SetRespawnTrigger()
+    {
+        _animator.SetTrigger(_respawnTriggerHash);
     }
 
     public void Update()

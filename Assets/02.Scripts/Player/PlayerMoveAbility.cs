@@ -41,6 +41,7 @@ public class PlayerMoveAbility : PlayerAbility
     void Update()
     {
         if (!_owner.PhotonView.IsMine) return;
+        if (_owner.GameState != EGameState.Game) return;
 
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
@@ -72,10 +73,10 @@ public class PlayerMoveAbility : PlayerAbility
 
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
         {
-            if (_owner.Stat.Stamina < _owner.Stat.StaminaDrainOnJump) return;
+            if (!_owner.Stat.CanJump()) return;
 
             _yVelocity = _jumpForce;
-            _owner.Stat.Stamina -= _owner.Stat.StaminaDrainOnJump;
+            _owner.Stat.ConsumeStamina(_owner.Stat.StaminaDrainOnJump);
         }
 
         Vector3 direction = new Vector3(0, _yVelocity, 0);
@@ -85,13 +86,13 @@ public class PlayerMoveAbility : PlayerAbility
 
     private void SpeedUpdate(float moveScale)
     {
-        ShouldRun = moveScale > 0 && Input.GetKey(KeyCode.LeftShift) && _owner.Stat.Stamina > _owner.Stat.StaminaDrainOnRun;
+        ShouldRun = moveScale > 0 && Input.GetKey(KeyCode.LeftShift) && _owner.Stat.CanRun();
         float targetSpeed;
 
         if (ShouldRun)
         {
             targetSpeed = _owner.Stat.WalkSpeed * _owner.Stat.RunMultiplier;
-            _owner.Stat.Stamina -= _owner.Stat.StaminaDrainOnRun * Time.deltaTime;
+            _owner.Stat.ConsumeStamina(_owner.Stat.StaminaDrainOnRun * Time.deltaTime);
         }
         else
         {

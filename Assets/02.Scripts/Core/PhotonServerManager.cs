@@ -11,14 +11,13 @@ public class PhotonServerManager : MonoBehaviourPunCallbacks
     // - 서버 접속 성공 / 실패
     // - 방 입장 성공 / 실패
     // - 누군가 방에 입장 등등 ...
-    public PlayerContext PlayerContext;
 
     private string _version = "0.0.1";
     private string _nickName = "G1";
 
     private void Start()
     {
-        _nickName = $"{UnityEngine.Random.Range(0, 999)}";
+        _nickName = $"Player {UnityEngine.Random.Range(0, 999)}";
 
         PhotonNetwork.GameVersion = _version;
         PhotonNetwork.NickName = _nickName;
@@ -62,40 +61,4 @@ public class PhotonServerManager : MonoBehaviourPunCallbacks
 
         PhotonNetwork.JoinRandomRoom();
     }
-
-    public override void OnJoinedRoom()
-    {
-        Debug.Log("룸 입장 완료");
-
-        Debug.Log($"룸 이름 : {PhotonNetwork.CurrentRoom.Name}");
-        Debug.Log($"플레이어 인원 : {PhotonNetwork.CurrentRoom.PlayerCount}");
-
-        Dictionary<int, Player> roomPlayers = PhotonNetwork.CurrentRoom.Players;
-
-        foreach ( Player player in roomPlayers.Values)
-        {
-            Debug.Log(player.NickName);
-        }
-
-        // 리소스 폴더에서 "Player" 이름을 가진 프리팹을 생성하고, 서버에 등록함
-        // 리소스 폴더는 좋지 않음 => 다른 방법을 찾아보자
-        GameObject prefab = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
-        PlayerContext.SetPlayer(prefab);
-    }
-
-    public override void OnJoinRandomFailed(short returnCode, string message)
-    {
-        Debug.Log($"룸 입장 실패 : {returnCode} - {message}");
-
-        // 랜덤 룸 입장에 실패하면 룸이 하나도 없으니 룸을 만들자
-
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 20; // 룸 최대 접속자 수
-        roomOptions.IsVisible = true; // 로비에서 룸을 보여줄 것인지
-        roomOptions.IsOpen = true; // 룸의 오픈 여부
-
-        // 룸 만들기
-        PhotonNetwork.CreateRoom("test", roomOptions);
-    }
-
 }

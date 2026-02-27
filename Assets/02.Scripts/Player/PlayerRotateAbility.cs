@@ -23,6 +23,7 @@ public class PlayerRotateAbility : PlayerAbility
     private void Update()
     {
         if (!_owner.PhotonView.IsMine) return;
+        if (_owner.GameState != EGameState.Game) return;
 
         _mx += Input.GetAxis("Mouse X") * _rotationSpeed;
         _my += Input.GetAxis("Mouse Y") * _rotationSpeed;

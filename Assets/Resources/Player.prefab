@@ -2506,9 +2506,10 @@ GameObject:
   - component: {fileID: 6524680759735473095}
   - component: {fileID: 873527368596599058}
   - component: {fileID: 5806694851308375882}
+  - component: {fileID: 2285972628355805492}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2662,10 +2663,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df42aa24455bf34288fac92d3994271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStat
-  Health: 100
-  MaxHealth: 100
-  Stamina: 100
-  MaxStamina: 100
+  _health: 100
+  _maxHealth: 100
+  _stamina: 100
+  _maxStamina: 100
   StaminaDrainOnRun: 10
   StaminaDrainOnJump: 10
   StaminaDrainOnAttack: 10
@@ -2757,6 +2758,12 @@ MonoBehaviour:
   - Type: 3
     SynchronizeType: 0
     Name: ReactionType
+  - Type: 9
+    SynchronizeType: 0
+    Name: Die
+  - Type: 9
+    SynchronizeType: 0
+    Name: Respawn
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -2800,6 +2807,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778829bc2ed144f4e8be8f565b54ef50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponAbility
+--- !u!114 &2285972628355805492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5902022743216581123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b1b3b370235dc41b87c6baf6bf73e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerScoreGetAbility
 --- !u!1 &6004280391353811118
 GameObject:
   m_ObjectHideFlags: 0
