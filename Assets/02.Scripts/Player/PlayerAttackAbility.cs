@@ -10,7 +10,7 @@ public class PlayerAttackAbility : PlayerAbility
 
     private bool _isAttacking;
 
-    private EAttackType _currentAttackType;
+    private EPlayerAttackType _currentAttackType;
     
     private PlayerAnimator _animator;
 
@@ -43,7 +43,7 @@ public class PlayerAttackAbility : PlayerAbility
             switch (AttackMode)
             {
                 case EAttackMode.Sequential:
-                    if (_currentAttackType >= EAttackType.Count - 1)
+                    if (_currentAttackType >= EPlayerAttackType.Count - 1)
                     {
                         _currentAttackType = 0;
                     }
@@ -59,7 +59,7 @@ public class PlayerAttackAbility : PlayerAbility
 
                     // RPX 매서드 호출 방식
                     // 다른 컴퓨터에 있는 내 플레이어 오브젝트의 PlayerAttack 메서드를 실행한다.
-                    _owner.PhotonView.RPC(nameof(PlayerAttackAnimation), RpcTarget.All, (EAttackType)UnityEngine.Random.Range(0, (int)EAttackType.Count));
+                    _owner.PhotonView.RPC(nameof(PlayerAttackAnimation), RpcTarget.All, (EPlayerAttackType)UnityEngine.Random.Range(0, (int)EPlayerAttackType.Count));
      
                     break;
             }
@@ -76,7 +76,7 @@ public class PlayerAttackAbility : PlayerAbility
     // 트리거 값을 공유하는 것이 아닌 함수 실행을 공유하는 것
 
     [PunRPC]
-    private void PlayerAttackAnimation(EAttackType type)
+    private void PlayerAttackAnimation(EPlayerAttackType type)
     {
         _animator.PlayAttack(type);
     }

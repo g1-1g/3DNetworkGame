@@ -3467,7 +3467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac3e8a807ed2ae4c8550d0ea0ef5dcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MiniMapCameraController
-  PlayerContext: {fileID: 993398969}
+  PlayerContext: {fileID: 0}
   _offsetY: 10
 --- !u!1 &319789941
 GameObject:
@@ -8176,7 +8176,7 @@ MonoBehaviour:
   - {fileID: 1445062508}
   - {fileID: 1615524018}
   - {fileID: 135768778}
-  PlayerContext: {fileID: 993398969}
+  PlayerContext: {fileID: 0}
   RespawnTime: 5
 --- !u!4 &946044499
 Transform:
@@ -8808,27 +8808,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 993398970}
-  - component: {fileID: 993398969}
+  - component: {fileID: 993398971}
   m_Layer: 0
-  m_Name: PlayerContext
+  m_Name: PlayerBinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &993398969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 993398968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c549ec7e880606744b62d4714113b35f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerContext
-  Player: {fileID: 0}
 --- !u!4 &993398970
 Transform:
   m_ObjectHideFlags: 0
@@ -8844,6 +8831,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &993398971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993398968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200bfb4e4370e5549ba392485c18c17e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerBinder
+  Player: {fileID: 0}
 --- !u!1001 &1042930785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10248,7 +10248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa5148014591a049b92bea8b245708b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  PlayerContext: {fileID: 993398969}
+  PlayerContext: {fileID: 0}
 --- !u!1001 &1226789789
 PrefabInstance:
   m_ObjectHideFlags: 0

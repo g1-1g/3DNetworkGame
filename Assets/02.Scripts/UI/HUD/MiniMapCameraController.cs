@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MiniMapCameraController : MonoBehaviour
 {
-    public PlayerContext PlayerContext;
+    public PlayerBinder PlayerContext;
     [SerializeField] private float _offsetY = 10f;
 
     private Transform _target;

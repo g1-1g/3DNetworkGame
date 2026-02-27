@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpawnManager : LocalSingleton<SpawnManager>
 {
     public Transform[] SpawnPositions;
-    public PlayerContext PlayerContext;
+    public PlayerBinder PlayerContext;
     public float RespawnTime = 5f;
 
     private BoxCollider _spawnArea;

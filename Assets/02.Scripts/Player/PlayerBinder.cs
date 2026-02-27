@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerContext : MonoBehaviour
+public class PlayerBinder : MonoBehaviour
 {
     public GameObject Player;
 

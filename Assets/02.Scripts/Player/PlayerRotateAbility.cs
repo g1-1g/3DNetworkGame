@@ -10,7 +10,7 @@ public class PlayerRotateAbility : PlayerAbility
     private float _rotationSpeed = 5;
 
     [SerializeField]
-    private PlayerContext _playerContext;
+    private PlayerBinder _playerContext;
 
     private float _mx;
     private float _my;
