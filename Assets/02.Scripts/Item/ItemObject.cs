@@ -21,16 +21,11 @@ public class ItemObject : MonoBehaviour
             return;
         }
 
-        if (other.TryGetComponent<PlayerController>(out PlayerController controller))
+        if (other.TryGetComponent<IScoreGetable>(out IScoreGetable scoreGetable))
         {
-            if (controller.GameState != EGameState.Game) return;
+            if (!scoreGetable.TryGet(_scoreValue)) return;
 
             _destroyRequested = true;
-
-            if (controller.PhotonView != null && controller.PhotonView.IsMine)
-            {
-                PlayerScore.AddLocalScore(_scoreValue);
-            }
 
             if (_view != null && _view.IsMine)
             {
