@@ -17394,7 +17394,7 @@ MonoBehaviour:
   - {fileID: 1000012970591572, guid: 85b4c0f96f9796943900cfa468222493, type: 3}
   - {fileID: 1000013317980782, guid: 188b84e9747dc5649bdcc019bccc6701, type: 3}
   _autoDropInterval: 5
-  _autoDropEnabled: 0
+  _autoDropEnabled: 1
 --- !u!4 &1911391890
 Transform:
   m_ObjectHideFlags: 0

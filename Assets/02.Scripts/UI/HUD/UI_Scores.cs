@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
+using Photon.Pun;
 using UnityEngine;
 
 public class UI_Scores : MonoBehaviour
@@ -16,21 +18,17 @@ public class UI_Scores : MonoBehaviour
     {
         var scores = ScoreManager.Instance.Scores;
 
-        List<ScoreData> scoreDates = scores.Values.ToList();
+        var sorted = PhotonNetwork.PlayerList.OrderByDescending
+            (p => PlayerScore.GetScore(p)).ToList();
 
         for (int i = 0; i < _scoreItems.Count; i++)
         {
-            if (scoreDates.Count <= i)
+            if (sorted.Count <= i)
             {
                 _scoreItems[i].SetScore(string.Empty, 0);
                 continue;
             }
-            ScoreData data = scoreDates[i];
-            if (data.Score == 200)
-            {
-
-            }
-            _scoreItems[i].SetScore(data.Nickname, data.Score);
+            _scoreItems[i].SetScore(sorted[i].NickName, PlayerScore.GetScore(sorted[i]));
         }
     }
 

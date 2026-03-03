@@ -47,16 +47,8 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerPropertiesUpdate(Player target, Hashtable changedProps)
     {
-        if (target.CustomProperties.TryGetValue(PlayerScore.ScoreKey, out var value))
+        if (changedProps.ContainsKey(PlayerScore.ScoreKey))
         {
-            ScoreData scoreData = new ScoreData()
-            {
-                Nickname = target.NickName,
-                Score = (int)value
-            };
-
-            _scores[target.ActorNumber] = scoreData;
-
             OnPlayerScoreChanged?.Invoke();
         }
     }

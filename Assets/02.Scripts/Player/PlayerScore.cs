@@ -29,10 +29,11 @@ public static class PlayerScore
         {
             return 0;
         }
-
-        ScoreManager.Instance.Scores.TryGetValue(player.ActorNumber, out ScoreData scoreData);
-
-        return scoreData.Score;
+        if (player.CustomProperties.TryGetValue(ScoreKey, out var value))
+        {
+            if (value is int intValue) return intValue;
+        }
+        return 0;
     }
 
     public static void AddLocalScore(int delta)
