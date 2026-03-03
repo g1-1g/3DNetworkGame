@@ -88,6 +88,7 @@ public class SpawnManager : LocalSingleton<SpawnManager>
             cc.enabled = true;
         }
 
+        Debug.Log("Player Respawned at: " + spawnPos);
         OnRespawn?.Invoke();
     }
 
