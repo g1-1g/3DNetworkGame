@@ -2807,6 +2807,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778829bc2ed144f4e8be8f565b54ef50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponAbility
+  _upgradeScaleAdd: 0.1
+  _upgradeArrange: 300
 --- !u!114 &2285972628355805492
 MonoBehaviour:
   m_ObjectHideFlags: 0

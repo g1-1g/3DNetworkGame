@@ -1,9 +1,15 @@
+using System;
 using Photon.Pun;
 using UnityEngine;
 
 public class PlayerWeaponAbility : PlayerAbility
 {
+    [SerializeField] private float _upgradeScaleAdd = 0.1f;
+    [SerializeField] private float _upgradeArrange = 300;
+
     private ColliderBridge _bridge;
+
+    private Vector3 _originalScale;
 
     protected override void Awake()
     {
@@ -16,6 +22,16 @@ public class PlayerWeaponAbility : PlayerAbility
     private void Start()
     {
         DeactiveCollider();
+        _originalScale = _bridge.gameObject.transform.localScale;
+        ScoreManager.Instance.OnPlayerScoreChanged += HandlerUpgrade;
+    }
+
+    private void HandlerUpgrade()
+    {
+        if(!_owner.PhotonView.IsMine) return;
+
+        int upgradeLevel = (int)(PlayerScore.GetScore(_owner.PhotonView.Owner) / _upgradeArrange);
+        _owner.PhotonView.RPC(nameof(Upgrade), RpcTarget.All, upgradeLevel);
     }
 
     public void ActiveCollider()
@@ -43,6 +59,13 @@ public class PlayerWeaponAbility : PlayerAbility
         PlayerController otherPlayer = other.gameObject.GetComponent<PlayerController>();
 
         otherPlayer.PhotonView.RPC(nameof(damageable.TakeDamage), RpcTarget.All, _owner.Stat.Damage, actorNumber);
+    }
+
+    [PunRPC]
+    private void Upgrade(int upgradeLevel)
+    {
+        Debug.Log("Upgrade Weapon!");
+        _bridge.gameObject.transform.localScale = _originalScale + _originalScale * _upgradeScaleAdd * upgradeLevel;
     }
 
     private void OnDestroy()

@@ -1,6 +1,5 @@
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class ItemSpawnManager : LocalSingleton<ItemSpawnManager>
 {
@@ -9,6 +8,7 @@ public class ItemSpawnManager : LocalSingleton<ItemSpawnManager>
 
     [SerializeField] private float _autoDropInterval;
     [SerializeField] private bool _autoDropEnabled = true;
+    [SerializeField] private int _dropAmountArrange = 5;
 
     private BoxCollider _autoDropArea;
     private float _autoDropTimer;
@@ -28,16 +28,20 @@ public class ItemSpawnManager : LocalSingleton<ItemSpawnManager>
     // 우리의 약속 : 방장에게 룸 관련해서 뭔가 요청을 할 때는 메서드 명에 Request로 시작하는 것이 유지보수면에서 유리
     public void RequestMakeItems(Vector3 position)
     {
-        if (PhotonNetwork.IsMasterClient)
+        int amount = Random.Range(1, _dropAmountArrange + 1);
+        for (int i = 0; i < amount; i++)
         {
-            // 방장이라면 그냥 함수 호출
-            Spawn(position);
-        }
-        else
-        {
-           // 방장이 아니라면 방장의 함수 호출
-            _photonView.RPC(nameof(Spawn), RpcTarget.MasterClient, position);
-        }
+            if (PhotonNetwork.IsMasterClient)
+            {
+                // 방장이라면 그냥 함수 호출
+                Spawn(position);
+            }
+            else
+            {
+                // 방장이 아니라면 방장의 함수 호출
+                _photonView.RPC(nameof(Spawn), RpcTarget.MasterClient, position);
+            }
+        }    
     }
 
     [PunRPC]
@@ -70,7 +74,7 @@ public class ItemSpawnManager : LocalSingleton<ItemSpawnManager>
                 Random.Range(-1f, 1f)
             ).normalized;
 
-            float force = Random.Range(4f, 7f);
+            float force = Random.Range(2f, 5f);
             rb.AddForce(randomDir * force, ForceMode.Impulse);
         }
     }
