@@ -12,12 +12,22 @@ public class AttackStateOfBear : IState
     public void OnEnter()
     {
         _bear.OnAttackFinishedEvent += HandleAttackFinished;
+        _bear.HitBox.OnHit += HandleHit;
         _bear.Animator.PlayAttack(EBearAttackType.Attack1);
+    }
+
+    private void HandleHit(Collider other)
+    {
+        if (other.TryGetComponent(out IDamageable damageable))
+        {
+            damageable.TakeDamage(_bear.Stat.Damage, 0);
+        }
     }
 
     public void OnExit()
     {
         _bear.OnAttackFinishedEvent -= HandleAttackFinished;
+        _bear.HitBox.OnHit -= HandleHit;
     }
 
     public void OnUpdate()
