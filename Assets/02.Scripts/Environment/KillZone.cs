@@ -8,6 +8,7 @@ public class KillZone : MonoBehaviour
     {
         other.TryGetComponent<IDamageable>(out IDamageable damageable);
 
+        if (damageable == null) return;
         StartCoroutine(KillCoroutine(damageable)); 
         
     }

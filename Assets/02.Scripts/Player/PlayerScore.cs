@@ -29,12 +29,10 @@ public static class PlayerScore
         {
             return 0;
         }
-
         if (player.CustomProperties.TryGetValue(ScoreKey, out var value))
         {
             if (value is int intValue) return intValue;
         }
-
         return 0;
     }
 
@@ -46,7 +44,20 @@ public static class PlayerScore
         }
 
         int current = GetScore(PhotonNetwork.LocalPlayer);
-        var props = new Hashtable { { ScoreKey, current + delta } };
+
+        ChangeLocalScore(current + delta);
+    }
+
+    public static void HalveScore()
+    {
+        int current = GetScore(PhotonNetwork.LocalPlayer);
+
+        ChangeLocalScore(current/2);
+    }
+
+    public static void ChangeLocalScore(int score)
+    {
+        var props = new Hashtable { { ScoreKey, score } };
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
     }
 }

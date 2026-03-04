@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public PlayerContext PlayerContext;
+    public PlayerBinder PlayerContext;
 
     private CinemachineCamera _camera;
 

@@ -1,7 +1,4 @@
-using System.Collections.Generic;
 using Photon.Pun;
-using Photon.Realtime;
-using Unity.Cinemachine;
 using UnityEngine;
 
 public class PhotonServerManager : MonoBehaviourPunCallbacks

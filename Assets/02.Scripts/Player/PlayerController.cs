@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
 
         Stat.ConsumeHealth(damage);
         Debug.Log("아프다");
+        PhotonView.RPC(nameof(Animator.SetGetHitTrigger), RpcTarget.All);
 
         if (Stat.Health <= 0)
         {
@@ -79,8 +80,9 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
         PhotonView.RPC(nameof(SetGameState), RpcTarget.All, EGameState.Dead);
         PhotonView.RPC(nameof(Animator.SetDieTrigger), RpcTarget.All);
 
-        OnDie?.Invoke(type);
         ItemSpawnManager.Instance.RequestMakeItems(transform.position);
+
+        OnDie?.Invoke(type);
     }
 
     [PunRPC]

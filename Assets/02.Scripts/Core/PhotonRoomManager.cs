@@ -18,7 +18,6 @@ public class PhotonRoomManager : MonoBehaviourPunCallbacks
     public event Action<Player> OnPlayerLeft;
     public event Action<string, string> OnPlayerDied;
 
-    public event Action<Player, int> OnPlayerScoreChanged;
     protected void Awake()
     {
         if (Instance != null)
@@ -40,8 +39,6 @@ public class PhotonRoomManager : MonoBehaviourPunCallbacks
         Debug.Log($"플레이어 인원 : {PhotonNetwork.CurrentRoom.PlayerCount}");
 
         _room = PhotonNetwork.CurrentRoom;
-
-        PlayerScore.EnsureLocalScore();
 
         OnDataChanged?.Invoke();
 
@@ -73,15 +70,6 @@ public class PhotonRoomManager : MonoBehaviourPunCallbacks
     {
         OnDataChanged?.Invoke();
         OnPlayerLeft?.Invoke(newPlayer);
-    }
-
-    public override void OnPlayerPropertiesUpdate(Player target, Hashtable changedProps)
-    {
-        if (changedProps.ContainsKey(PlayerScore.ScoreKey))
-        {
-            int score = PlayerScore.GetScore(target);
-            OnPlayerScoreChanged?.Invoke(target, score);
-        }
     }
 
     [PunRPC]

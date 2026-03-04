@@ -5049,7 +5049,7 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -5098,7 +5098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b99be52dc5b134f886943bb6858aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemObject
-  _scoreValue: 1
+  _scoreValue: 100
 --- !u!136 &-3568196963766519353
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum EAttackType
+public enum EPlayerAttackType
 {
     Attack1,
     Attack2, 
@@ -27,4 +27,15 @@ public enum EDieType
     InstantRespawn,
     DelayedRespawn,
     GameOver,
+}
+
+public enum EMonsterState
+{
+    Idle,
+    Sleep,
+    Patrol,
+    Trace,
+    Attack,
+    Damaged,
+    Die,
 }

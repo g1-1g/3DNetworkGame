@@ -14,8 +14,11 @@ public class ItemObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"Trigger with {other.name}, layer ={ other.gameObject.layer}");
-
+        Debug.Log(
+         $"[ItemTrigger] self={name} id={GetInstanceID()} scene ={ gameObject.scene.name}active ={ gameObject.activeInHierarchy}" +
+          $"viewId={_view?.ViewID} owner={_view?.Owner?.NickName} " +
+          $"other={other.name} otherLayer={other.gameObject.layer}otherRoot ={ other.transform.root.name}"
+      );
         if (_destroyRequested)
         {
             return;
