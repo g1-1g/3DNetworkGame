@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 public class HitBox : MonoBehaviour
 {
     private Collider _collider;
 
+    public event Action<Collider> OnHit;
     private void Awake()
     {
         _collider = GetComponent<Collider>();
@@ -21,9 +23,6 @@ public class HitBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out IDamageable damageable))
-        {
-            Debug.Log($"Hit");
-        }
+        OnHit?.Invoke(other);
     }
 }

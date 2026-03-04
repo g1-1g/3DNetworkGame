@@ -10,6 +10,8 @@ public class BearController : MonoBehaviour
 
     public NavMeshAgent Agent { get; private set; }
 
+    public PhotonView PhotonView { get; private set; }
+
     public BearStateMachine StateMachine { get; private set; } = new BearStateMachine();
 
     public IdleStateOfBear IdleState { get; private set; }
@@ -21,6 +23,8 @@ public class BearController : MonoBehaviour
     
     public Transform Target => _target;
 
+    public HitBox HitBox;
+
     public event Action OnAttackFinishedEvent;
     public event Action OnGetHitFinishedEvent;
 
@@ -29,6 +33,7 @@ public class BearController : MonoBehaviour
         Animator = GetComponent<BearAnimator>();
         Stat = GetComponent<BearStat>();
         Agent = GetComponent<NavMeshAgent>();
+        PhotonView = GetComponent<PhotonView>();
 
         IdleState = new IdleStateOfBear(this);
         ChaseState = new ChaseStateOfBear(this);
