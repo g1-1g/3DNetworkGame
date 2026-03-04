@@ -1,10 +1,24 @@
 using UnityEngine;
 
+public enum ETeam
+{
+    Player,
+    Enemy,
+}
 public enum EPlayerAttackType
 {
     Attack1,
     Attack2, 
     Attack3, 
+
+    Count
+}
+
+public enum EBearAttackType
+{
+    Attack1,
+    Attack2,
+    Attack3,
 
     Count
 }

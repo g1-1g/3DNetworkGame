@@ -6,6 +6,14 @@ public class BearStat : MonoBehaviour
 
     [SerializeField] private float _maxHealth;
 
+    public float SenseRange = 5f;
+
+    public float AttackRange = 2f;
+
+    public float PatrolRange = 15f;
+
+    public float ChaseRange = 10f;
+
     public float Damage;
 
     public float WalkSpeed;
@@ -15,6 +23,8 @@ public class BearStat : MonoBehaviour
     public float RunSpeed {  get; private set; }
 
     public float Health => _health;
+
+
 
 
     #region Health
