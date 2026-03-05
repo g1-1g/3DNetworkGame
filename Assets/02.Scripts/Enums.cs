@@ -1,5 +1,10 @@
 using UnityEngine;
 
+public enum ECharacterType
+{
+    Male,
+    Female,
+}
 public enum ETeam
 {
     Player,
