@@ -8,7 +8,7 @@ public class MiniMapCameraController : MonoBehaviour
 
     private Transform _target;
     
-    private void Start()
+    private void Awake()
     {
         PlayerContext.OnPlayerAssigned += SetTarget;
     }

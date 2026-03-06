@@ -777,6 +777,7 @@ GameObject:
   - component: {fileID: 3899194402782860489}
   - component: {fileID: 7224820349939434940}
   - component: {fileID: 1093564466111554598}
+  - component: {fileID: 6688393280353757855}
   m_Layer: 0
   m_Name: UI_RoomItem
   m_TagString: Untagged
@@ -791,7 +792,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6337713649369070377}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -880,6 +881,22 @@ MonoBehaviour:
   m_FlexibleWidth: 1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &6688393280353757855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6337713649369070377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416f68057c06e6a41b6f53114c7e2ece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_RoomItem
+  _roomNameText: {fileID: 2707686337937649831}
+  _masterNicknameTextUI: {fileID: 5608611950981806830}
+  _playerCountText: {fileID: 5786195741908860197}
+  _roomNameButton: {fileID: 6783547942413771790}
 --- !u!1 &8160870870832607215
 GameObject:
   m_ObjectHideFlags: 0

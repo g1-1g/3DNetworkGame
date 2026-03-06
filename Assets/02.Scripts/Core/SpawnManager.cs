@@ -3,8 +3,10 @@ using System.Collections;
 using Photon.Pun;
 using UnityEngine;
 
-public class SpawnManager : LocalSingleton<SpawnManager>
+public class SpawnManager : MonoBehaviourPunCallbacks
 {
+    public static SpawnManager Instance { get; private set; }
+
     public Transform[] SpawnPositions;
     public PlayerBinder PlayerContext;
     public float RespawnTime = 5f;
@@ -12,15 +14,44 @@ public class SpawnManager : LocalSingleton<SpawnManager>
     private BoxCollider _spawnArea;
 
     private GameObject _player;
+    private bool _hasSpawnedLocalPlayer;
 
     public event Action OnRespawn;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+        DontDestroyOnLoad(gameObject);
 
         _spawnArea = GetComponent<BoxCollider>();
     }
+
+    public override void OnJoinedRoom()
+    {
+        TrySpawnLocalPlayer();
+    }
+
+    public void Start()
+    {
+        TrySpawnLocalPlayer();
+    }
+
+    private void TrySpawnLocalPlayer()
+    {
+        if (!PhotonNetwork.InRoom) return;
+        if (_hasSpawnedLocalPlayer) return;
+
+        Spawn();
+        _hasSpawnedLocalPlayer = _player != null;
+    }
+
     public void Spawn()
     {
         if (SpawnPositions == null)
@@ -92,10 +123,8 @@ public class SpawnManager : LocalSingleton<SpawnManager>
         OnRespawn?.Invoke();
     }
 
-    protected override void OnDestroy()
+    private void OnDestroy()
     {
-        base.OnDestroy();
-
         if (_player == null) return;
         _player.GetComponent<PlayerController>().OnDie -= HandlePlayerDie;
     }

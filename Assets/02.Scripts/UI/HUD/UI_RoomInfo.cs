@@ -1,4 +1,5 @@
 using System;
+using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
@@ -14,8 +15,20 @@ public class UI_RoomInfo : MonoBehaviour
     {
         _roomExitButton.onClick.AddListener(ExitRoom);
 
-        PhotonRoomManager.Instance.OnDataChanged += Refresh;
+        if (PhotonNetwork.InRoom)
+        {
+            Refresh();
+        }
+    }
 
+    void OnEnable()
+    {
+        PhotonRoomManager.Instance.OnDataChanged += Refresh;
+    }
+
+    void OnDisable()
+    {
+        PhotonRoomManager.Instance.OnDataChanged -= Refresh;
     }
 
     private void Refresh()
