@@ -29,6 +29,14 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         DontDestroyOnLoad(gameObject);
     }
 
+    public void Start()
+    {
+        if (PhotonNetwork.InRoom)
+        {
+            PlayerScore.EnsureLocalScore();
+        }
+    }
+
     public override void OnJoinedRoom()
     {
         PlayerScore.EnsureLocalScore();

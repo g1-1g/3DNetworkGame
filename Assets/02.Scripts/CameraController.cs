@@ -12,9 +12,6 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         _camera = GetComponent<CinemachineCamera>();
-    }
-    void Start()
-    {
         PlayerContext.OnPlayerAssigned += PlayerSet;
     }
 

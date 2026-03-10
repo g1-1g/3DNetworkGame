@@ -8,10 +8,23 @@ public class PhotonServerManager : MonoBehaviourPunCallbacks
     // - 서버 접속 성공 / 실패
     // - 방 입장 성공 / 실패
     // - 누군가 방에 입장 등등 ...
+    public static PhotonServerManager Instance { get; private set; }
 
     private string _version = "0.0.1";
     private string _nickName = "G1";
 
+    protected void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+        DontDestroyOnLoad(gameObject);
+    }
     private void Start()
     {
         _nickName = $"Player {UnityEngine.Random.Range(0, 999)}";
@@ -55,7 +68,5 @@ public class PhotonServerManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("로비 접속 완료");
         Debug.Log(PhotonNetwork.InLobby);
-
-        PhotonNetwork.JoinRandomRoom();
     }
 }

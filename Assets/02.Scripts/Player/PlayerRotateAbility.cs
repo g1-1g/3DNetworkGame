@@ -1,6 +1,5 @@
 using Unity.Cinemachine;
 using UnityEngine;
-using static UnityEngine.UI.GridLayoutGroup;
 
 public class PlayerRotateAbility : PlayerAbility
 {

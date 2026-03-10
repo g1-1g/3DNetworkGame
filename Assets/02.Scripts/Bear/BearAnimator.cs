@@ -34,7 +34,7 @@ public class BearAnimator : MonoBehaviour
     }
 
     [PunRPC]
-    public void PlayAttack(EPlayerAttackType type)
+    public void PlayAttack(EBearAttackType type)
     {
         _animator.SetInteger(_attackTypeHash, (int)type);
         SetAttackTrigger();
