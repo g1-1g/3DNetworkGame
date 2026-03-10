@@ -11,12 +11,12 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f3758f8f58fdef43803eb9be1df0608, type: 3}
   m_Name: PhotonServerSettings
-  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.ServerSettings
+  m_EditorClassIdentifier: 
   AppSettings:
     AppIdRealtime: 15fcf6a2-4cb1-4088-b68d-69f25965ec34
     AppIdFusion: 
     AppIdChat: 
-    AppIdVoice: 
+    AppIdVoice: edbf11ef-7b53-4a71-9f7f-356480de8f8a
     AppVersion: 
     UseNameServer: 1
     FixedRegion: kr
@@ -28,33 +28,32 @@ MonoBehaviour:
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: kr
+  DevRegion: 
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
+  - CantHearYou
+  - ChangeColour
   - ClickRpc
   - DestroyRpc
+  - HeresWhy
   - DestroySpaceship
   - Fire
-  - RespawnSpaceship
+  - NotifyPlayerDeath
+  - PlayAttack
   - PlayerAttackAnimation
-  - TakeDamage
+  - RequestDestroy
+  - RespawnSpaceship
   - SetDieTrigger
+  - SetGameState
+  - SetGetHitTrigger
   - SetIsDie
   - SetRespawnTrigger
-  - NotifyPlayerDeath
   - Spawn
-  - RequestDestroy
-  - SetGameState
-  - SetAttackTrigger
-  - SetGetHitTrigger
-  - PlayAttack
+  - TakeDamage
   - Upgrade
-  - PlayIdle
-  - PlayRun
-  - PlayWalk
   DisableAutoOpenWizard: 1
   ShowSettings: 1
-  DevRegionSetOnce: 1
+  DevRegionSetOnce: 0
